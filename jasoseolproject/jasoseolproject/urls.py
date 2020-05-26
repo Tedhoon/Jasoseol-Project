@@ -16,6 +16,10 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from jasoseolapp.views import index, create, detail, delete, update
+from accounts.views import register
+
+from django.contrib.auth.views import LoginView, LogoutView
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', index, name="index"),
@@ -23,4 +27,7 @@ urlpatterns = [
     path('detail/<int:jss_id>/', detail, name="detail"),
     path('delete/<int:jss_id>/', delete, name="delete"),
     path('update/<int:jss_id>/', update, name="update"),
+    path('register/', register, name="register"),
+    path('login/', LoginView.as_view(), name="login"),
+    path('logout/', LogoutView.as_view(), name="logout"),
 ]

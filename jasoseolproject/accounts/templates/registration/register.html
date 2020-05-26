@@ -1,0 +1,6 @@
+<form method="POST" action="">
+{% csrf_token %}
+<!-- POST방식에서는 csrf공격을 막기위한 token을 같이 첨부한다 -->
+{{registerform.as_p}}
+<input type="submit" value="회원가입">
+</form>
