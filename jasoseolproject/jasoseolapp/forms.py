@@ -8,3 +8,10 @@ class JasoseolForm(forms.ModelForm):
         model = Jasoseol
         fields = '__all__'
         # fields = ('title', 'body')
+
+    def __init__(self, *args, **kwargs):
+        # super() => 자식 클래스(JasosoelForm)에서 부모 클래스(ModelForm)의 내용을 사용하고 싶을 때 사용
+        super().__init__(*args, **kwargs)
+        self.fields['body'].widget.attrs.update(
+            {'placeholder': "자기소개서를 입력하세요",
+             'class': 'jss_content'})

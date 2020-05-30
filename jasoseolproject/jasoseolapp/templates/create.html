@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,6 +13,8 @@
         {{myform.as_p}}
         <input type="submit" value="작성완료">
     </form>
+    글자수 : <span class="counting_text"></span>
 
+    <script src="{% static 'js/count.js' %}"></script>
 </body>
 </html>
