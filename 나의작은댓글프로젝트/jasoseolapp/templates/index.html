@@ -1,0 +1,51 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jasoseol</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/index.css' %}">
+</head>
+<body>
+
+   
+
+    <div class="container">
+        {% if user.is_authenticated %}
+        <p>{{user}}님 안녕하세요!</p>
+        <a href="{% url 'logout' %}">
+            <button>로그아웃</button>
+        </a>
+        {% else %}
+        <a href="{% url 'register' %}">
+            <button>회원가입</button>
+        </a>
+        <a href="{% url 'login' %}">
+            <button>로그인</button>
+        </a>
+        {% endif %}
+
+
+        <div class="make_jss">
+            <div class="Go_btn">
+                <a href="{% url 'create' %}">
+                    +
+                </a>
+            </div>
+            <h3>자기소개서 작성</h3>
+        </div>
+
+
+        {% for jss in myjss %}
+        <a href="{% url 'detail' jss.id %}">
+            <div class="my_jss">
+                <p>{{jss.id}} 번째 자소서</p>
+                <p>{{jss.title}}</p>
+            </div>
+        </a>
+        {% endfor %}
+    </div>
+    
+</body>
+</html>

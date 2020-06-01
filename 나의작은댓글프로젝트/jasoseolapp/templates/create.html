@@ -1,0 +1,20 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    자기소개서 작성하는 페이지
+    <form method="POST">
+        {% csrf_token %}
+        {{myform.as_p}}
+        <input type="submit" value="작성완료">
+    </form>
+    글자수 : <span class="counting_text"></span>
+
+    <script src="{% static 'js/count.js' %}"></script>
+</body>
+</html>
