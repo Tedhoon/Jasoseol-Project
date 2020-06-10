@@ -13,17 +13,17 @@
 
     <div class="container">
         {% if user.is_authenticated %}
-        <p>{{user}}님 안녕하세요!</p>
-        <a href="{% url 'logout' %}">
-            <button>로그아웃</button>
-        </a>
+            <p>{{user}}님 안녕하세요!
+            <a href="{% url 'logout' %}">
+                <button>로그아웃</button>
+            </a></p>
         {% else %}
-        <a href="{% url 'register' %}">
-            <button>회원가입</button>
-        </a>
-        <a href="{% url 'login' %}">
-            <button>로그인</button>
-        </a>
+            <a href="{% url 'register' %}">
+                <button>회원가입</button>
+            </a>
+            <a href="{% url 'login' %}">
+                <button>로그인</button>
+            </a>
         {% endif %}
 
 
