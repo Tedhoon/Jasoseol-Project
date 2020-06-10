@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .forms import JasoseolForm
-from .models import Jasoseol
+from .forms import JasoseolForm, CommentForm
+from .models import Jasoseol, Comment
 from django.http import Http404
 
 def index(request):
@@ -8,12 +8,20 @@ def index(request):
 
     return render(request, 'index.html',{'myjss':myjss})
 
+    
+def my_jss(request):
+    myjss = Jasoseol.objects.filter(author=request.user)
+    
+    return render(request, 'index.html',{'myjss':myjss})
+
 
 def create(request):
     if request.method == "POST":
         myform = JasoseolForm(request.POST)
         if myform.is_valid():
-            myform.save()
+            temp = myform.save(commit=False)
+            temp.author = request.user
+            temp.save()
             return redirect('index')
 
     myform = JasoseolForm()
@@ -27,7 +35,10 @@ def detail(request, jss_id):
     except:
         raise Http404
 
-    return render(request, 'detail.html',{'jss':jss})
+    mycom_form = CommentForm()
+
+    context = {'jss':jss, 'comment_form':mycom_form}
+    return render(request, 'detail.html',context)
 
 
 def delete(request, jss_id):
@@ -50,3 +61,22 @@ def update(request, jss_id):
     myform = JasoseolForm(instance=jss)    
     return render(request, 'create.html', {'myform':myform})
     
+
+
+def create_comment(request, jss_id):
+    filled_form = CommentForm(request.POST) 
+
+    if filled_form.is_valid():
+        comment_form=filled_form.save(commit=False)
+        comment_form.author = request.user
+        comment_form.save()
+    
+    return redirect('detail', jss_id)
+
+
+def delete_comment(request, com_id,jss_id):
+    mycom = Comment.objects.get(id = com_id)
+    if not mycom.author == request.user:
+        return redirect('detail', jss_id)
+    mycom.delete()
+    return redirect('detail', jss_id)

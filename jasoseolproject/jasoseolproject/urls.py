@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from jasoseolapp.views import index, create, detail, delete, update
+from jasoseolapp.views import index, my_jss, create, detail, delete, update, create_comment, delete_comment
 from accounts.views import register
 
 from django.contrib.auth.views import LoginView, LogoutView
@@ -23,10 +23,15 @@ from django.contrib.auth.views import LoginView, LogoutView
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', index, name="index"),
+    path('my_jss/', my_jss, name="my_jss"),
     path('create', create, name="create"),
     path('detail/<int:jss_id>/', detail, name="detail"),
     path('delete/<int:jss_id>/', delete, name="delete"),
     path('update/<int:jss_id>/', update, name="update"),
+    path('create_comment/<int:jss_id>',create_comment , name="create_comment"),
+    path('delete_comment/<int:com_id>/<int:jss_id>',delete_comment , name="delete_comment"),
+
+    # accounts
     path('register/', register, name="register"),
     path('login/', LoginView.as_view(), name="login"),
     path('logout/', LogoutView.as_view(), name="logout"),

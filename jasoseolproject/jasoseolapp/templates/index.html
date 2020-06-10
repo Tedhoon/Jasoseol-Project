@@ -36,16 +36,22 @@
             <h3>자기소개서 작성</h3>
         </div>
 
-
+        <div>
+            <a href="{% url 'my_jss' %}"><button>내 자기소개서만 보기</button></a>
+            <a href="{% url 'index' %}"><button>모든 자기소개서 보기</button></a>
+        </div>
+        <br><br>
+    
         {% for jss in myjss %}
         <a href="{% url 'detail' jss.id %}">
             <div class="my_jss">
-                <p>{{jss.id}} 번째 자소서</p>
                 <p>{{jss.title}}</p>
+                <p>{{jss.updated_at|date:"Y-m-d"}}</p>
+                <p>{{jss.author}}</p>
             </div>
         </a>
         {% endfor %}
-    </div>
+    </br>
     
 </body>
 </html>
