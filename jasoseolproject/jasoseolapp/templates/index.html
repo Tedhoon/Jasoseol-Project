@@ -25,7 +25,7 @@
                 <button>로그인</button>
             </a>
         {% endif %}
-
+            
 
         <div class="make_jss">
             <div class="Go_btn">
@@ -35,11 +35,12 @@
             </div>
             <h3>자기소개서 작성</h3>
         </div>
-
+        {% if user.is_authenticated %}
         <div>
             <a href="{% url 'my_jss' %}"><button>내 자기소개서만 보기</button></a>
             <a href="{% url 'index' %}"><button>모든 자기소개서 보기</button></a>
         </div>
+        {% endif %}
         <br><br>
     
         {% for jss in myjss %}
